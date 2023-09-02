@@ -6,14 +6,13 @@ Prisma Client Extension to automatically generate a unique slug creating a new D
 Provides a new function that generates a slug depending on a selected field. If needed the field can be unique.
 
 ## Install
-
-`
+```
 npm install prisma-extension-create-with-slug
-`
+```
 
 ## Usage 
 
-`
+```
 import {createWithSlugFn} from prisma-extension-create-with-slug
 
 const prisma = new PrismaClient().$extends(createWithSlugFn())
@@ -29,11 +28,11 @@ const prisma = new PrismaClient().$extends(createWithSlugFn())
    )
 
 
-`
+```
 
 ## Options 
 
-`
+```
 await prisma.YOUR_MODEL.createWithSlug({
     data: {
         ...
@@ -42,7 +41,7 @@ await prisma.YOUR_MODEL.createWithSlug({
     unique: true       // whether or not the slug should be unique (increments an integer after the slug)
 })
 
-`
+```
 
 ## Dependencies
 
