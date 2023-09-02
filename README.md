@@ -1,11 +1,20 @@
-# Prisma Client to automatically generate a unique slug creating a new Database entry. 
+# prisma-extension-create-with-slug
+## Description
+
+Prisma Client Extension to automatically generate a unique slug creating a new Database entry. 
 
 Provides a new function that generates a slug depending on a selected field. If needed the field can be unique.
 
+## Install
+
+`
+npm install prisma-extension-create-with-slug
+`
 
 ## Usage 
+
 `
-import {createWithSlugFn} from @baito/prisma-client-extension-create-slugify
+import {createWithSlugFn} from prisma-extension-create-with-slug
 
 const prisma = new PrismaClient().$extends(createWithSlugFn())
 

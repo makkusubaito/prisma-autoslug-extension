@@ -9,7 +9,7 @@ type Args = {
 
 export const createWithSlugFn = () =>
   Prisma.defineExtension({
-    name: "prisma-create-with-slug",
+    name: "prisma-extension-create-with-slug",
     model: {
       $allModels: {
         async createWithSlug<T,A>(

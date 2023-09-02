@@ -1,8 +1,8 @@
 {
-  "name": "prisma-client-extension-create-slugify",
+  "name": "prisma-extension-create-with-slug",
   "version": "0.0.1",
-  "author": "Maximilian Metzner, baito UG (haftungsbeschränkt)",
-  "description": "",
+  "author": "mlmetzner",
+  "description": "Prisma Client Extension to automatically generate a unique slug creating a new Database entry. ",
   "license": "MIT",
   "keywords": [
     "prisma",
