@@ -1,22 +1,20 @@
 import { PrismaClient } from "@prisma/client";
-import { existsFn } from "../dist"
+import { createWithSlugFn } from "../dist";
 
-const prisma = new PrismaClient().$extends(existsFn({}))
+const prisma = new PrismaClient().$extends(createWithSlugFn())
 
 async function main() {
-  const user = await prisma.user.exists({ where: { id: 1 } })
 
-  const post = await prisma.post.exists({
-    where: {
-      OR: [
-        { title: { contains: 'prisma' } },
-        { content: { contains: 'prisma' } },
-      ],
-      published: true,
+  const post = await prisma.post.createWithSlug({data: 
+    {
+      title: "Hello World!",
+      updatedAt: new Date(),
     },
-  })
+     field: "title",
+    unique: true} 
+   )
 
-  console.log({ user, post })
+  console.log({ post })
 }
 
 main()
