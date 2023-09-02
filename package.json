@@ -11,6 +11,10 @@
     "slugify",
     "slug"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/makkusubaito/prisma-autoslug-extension"
+  },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
