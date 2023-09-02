@@ -1,6 +1,6 @@
 {
   "name": "prisma-extension-create-with-slug",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "author": "mlmetzner",
   "description": "Prisma Client Extension to automatically generate a unique slug creating a new Database entry. ",
   "license": "MIT",
@@ -21,7 +21,7 @@
     "build": "tsc"
   },
   "peerDependencies": {
-    "@prisma/client": "latest"
+    "@prisma/client": "^5.2.0"
   },
   "devDependencies": {
     "@prisma/client": "latest",

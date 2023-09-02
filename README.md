@@ -23,7 +23,8 @@ const prisma = new PrismaClient().$extends(createWithSlugFn())
       title: "Hello World!",
       updatedAt: new Date(),
     },
-     field: "title",
+     sourceField: "title",
+     targetField: "slug",
     unique: true} 
    )
 
@@ -37,7 +38,8 @@ await prisma.YOUR_MODEL.createWithSlug({
     data: {
         ...
     },
-    field: 'FIELDNAME' // name of the field you want the slug to be based on
+    fieldField: 'FIELDNAME' // name of the field you want the slug to be based on
+    targetField: 'FIELDNAME' // name of the field the slug should be written to
     unique: true       // whether or not the slug should be unique (increments an integer after the slug)
 })
 

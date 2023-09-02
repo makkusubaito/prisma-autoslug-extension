@@ -1,10 +1,14 @@
-import { Prisma } from '@prisma/client/extension'
-import slugify from 'slugify'
+import { Prisma } from '@prisma/client/extension';
+import slugify from 'slugify';
 
 type Args = {
-  field: string,
+  sourceField: string,
+  targetField?: string,
   unique?: boolean,
 }
+
+// omit generic type F from data
+
 
 
 export const createWithSlugFn = () =>
@@ -14,18 +18,26 @@ export const createWithSlugFn = () =>
       $allModels: {
         async createWithSlug<T,A>(
           this: T,
-          args: Omit<Prisma.Args<T, 'create'> & Args, 'data'>  & {data: Omit<Prisma.Args<T, 'create'>['data'], 'slug'>}
+          args: Omit<Prisma.Args<T, 'create'> & Args, 'data'>  & {data: Partial<Prisma.Args<T, 'create'>['data']>  } 
         ): Promise<Prisma.Result<T,A, 'create'>> {
+          if (args.data[args.sourceField] === undefined) {
+            const errorMessage = "Cannot create slug, sourceField " + args.sourceField + " is missing in create data"
+            throw new Error(errorMessage)
+
+          }
+          const sourceField = args.sourceField ? args.sourceField : 'title'
+          const targetField = args.targetField ? args.targetField : 'slug'
+          const unique = args.unique === true ? true : false
           const ctx = Prisma.getExtensionContext(this)
-          let slug = slugify((args.data as any)[args.field],{
+          let slug = slugify((args.data as any)[sourceField],{
             lower: true,
             strict: true,
           })
-          if (args.unique) {
+          if (unique) {
             let number = 0 
             let count = await (ctx as any).count({
               where: {
-                slug,
+                [targetField]: slug,
               },
             })
             while (count > 0) {
@@ -44,7 +56,7 @@ export const createWithSlugFn = () =>
           const result = await (ctx as any).create({
             data: {
               ...args.data,
-              slug,
+              [targetField]: slug,
             }})
           return result
         },

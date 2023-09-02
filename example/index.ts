@@ -7,11 +7,12 @@ async function main() {
 
   const post = await prisma.post.createWithSlug({data: 
     {
-      title: "Hello World!",
+      slug: "Hello World!",
       updatedAt: new Date(),
     },
-     field: "title",
-    unique: true} 
+    sourceField: 'title',
+    targetField: 'slug',
+     unique: true} 
    )
 
   console.log({ post })
