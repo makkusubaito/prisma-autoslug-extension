@@ -1,49 +1,45 @@
-# Prisma Client Extension starter repository
+# Prisma Client to automatically generate a unique slug creating a new Database entry. 
 
-Use this template to bootstrap creating your Prisma Client extension.
-
-Client extensions provide a powerful way to add functionality to Prisma Client in a type-safe manner. You can use them to create simple and flexible solutions that are not natively supported by Prisma. 
+Provides a new function that generates a slug depending on a selected field. If needed the field can be unique.
 
 
+## Usage 
+`
+import {createWithSlugFn} from @baito/prisma-client-extension-create-slugify
 
-If you would like to learn more, refer to the [Prisma docs](https://www.prisma.io/docs/concepts/components/prisma-client/client-extensions) to learn more information.
+const prisma = new PrismaClient().$extends(createWithSlugFn())
 
-## Get started
 
-Click the **Use this template** button and provide details for your Client extension
+  const post = await prisma.post.createWithSlug({data: 
+    {
+      title: "Hello World!",
+      updatedAt: new Date(),
+    },
+     field: "title",
+    unique: true} 
+   )
 
-Install the dependencies:
 
-```
-npm install
-```
+`
 
-Build the extension:
+## Options 
 
-```
-npm run build
-```
+`
+await prisma.YOUR_MODEL.createWithSlug({
+    data: {
+        ...
+    },
+    field: 'FIELDNAME' // name of the field you want the slug to be based on
+    unique: true       // whether or not the slug should be unique (increments an integer after the slug)
+})
 
-Set up the example app:
+`
 
-```
-cd example
-npm install
-npx prisma db push
-```
+## Dependencies
 
-Test the extension in the example app:
-```
-npm run dev
-```
+[slugify] (https://github.com/simov/slugify)
+create with the [prisma extension starter](https://github.com/prisma/prisma-client-extension-starter)
 
-### Evolve the extension
 
-The code for the extension is located in the [`index.ts`](./src/index.ts) file. Feel free to update it before publishing your Client extension to [npm](https://npmjs.com/).
+ 
 
-## Learn more
-
-- [Docs — Client extensions](https://www.prisma.io/docs/concepts/components/prisma-client/client-extensions)
-- [Docs — Shared extensions](https://www.prisma.io/docs/concepts/components/prisma-client/client-extensions/shared-extensions)
-- [Examples](https://github.com/prisma/prisma-client-extensions/tree/main)
-- [Preview announcement blog post](https://www.prisma.io/blog/client-extensions-preview-8t3w27xkrxxn#introduction)
