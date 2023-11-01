@@ -15,5 +15,6 @@ model Post {
   createdAt DateTime @default(now())
   updatedAt DateTime
   title     String
+  name      String
   slug      String   @unique
 }

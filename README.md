@@ -38,7 +38,7 @@ await prisma.YOUR_MODEL.createWithSlug({
     data: {
         ...
     },
-    fieldField: 'FIELDNAME' // name of the field you want the slug to be based on
+    sourceField: 'FIELDNAME' or ['FIELDNAME1', 'FIELDNAME2'] // name of the field(s) you want the slug to be based on
     targetField: 'FIELDNAME' // name of the field the slug should be written to
     unique: true       // whether or not the slug should be unique (increments an integer after the slug)
 })

@@ -1,21 +1,21 @@
 import { PrismaClient } from "@prisma/client";
 import { createWithSlugFn } from "../dist";
 
-const prisma = new PrismaClient().$extends(createWithSlugFn())
+const prisma = new PrismaClient().$extends(createWithSlugFn());
 
 async function main() {
-
-  const post = await prisma.post.createWithSlug({data: 
-    {
-      slug: "Hello World!",
+  const post = await prisma.post.createWithSlug({
+    data: {
+      title: "Hello World!",
+      name: "test",
       updatedAt: new Date(),
     },
-    sourceField: 'title',
-    targetField: 'slug',
-     unique: true} 
-   )
+    sourceField: "title",
+    targetField: "slug",
+    unique: true,
+  });
 
-  console.log({ post })
+  console.log({ post });
 }
 
-main()
+main();
